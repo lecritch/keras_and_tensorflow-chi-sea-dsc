@@ -8,7 +8,7 @@ Let's review some modeling concepts we've used to date with [this quick exercise
 
 We do this to remind ourselves that the basic components of good modeling practice, and even the methods themselves, are _the same_ with Neural Nets as that are with _sklearn_ or _statsmodels_.
 
-The above exercise uses only one train-test split, but is still usefule.  We will be using train, validation, test in this notebook, for good practice.
+The above exercise uses only one train-test split, but is still useful.  We will be using train, validation, test in this notebook, for good practice.
 
 ## Objectives:
 - Compare pros and cons of Keras vs TensorFlow
@@ -18,6 +18,9 @@ The above exercise uses only one train-test split, but is still usefule.  We wil
 ```python
 import keras
 ```
+
+    Using TensorFlow backend.
+
 
 Wait a second, what is that warning? 
 `Using TensorFlow backend.`
@@ -32,6 +35,10 @@ Coded in Python, that can be layered on top of many different back-end processin
 While each of these systems has their own coding methods, Keras abstracts from that in streamlined pythonic manner we are used to seeing in other python modeling libraries.
 
 Keras development is backed primarily by Google, and the Keras API comes packaged in TensorFlow as tf.keras. Additionally, Microsoft maintains the CNTK Keras backend. Amazon AWS is maintaining the Keras fork with MXNet support. Other contributing companies include NVIDIA, Uber, and Apple (with CoreML).
+
+Theano has been discontinued.  The last release was 2017, but can still be used.
+
+We will use TensorFlow, as it is the most popular. TensorFlow became the most used Keras backend, and  eventually integrated Keras into via the tf.keras submodule of TensorFlow.  
 
 ## Wait, what's TensorFlow?
 
@@ -65,10 +72,6 @@ import matplotlib.image as mpimg
 
 imgplot = plt.imshow(image)
 ```
-
-
-![png](index_files/index_13_0.png)
-
 
 
 ```python
@@ -109,19 +112,15 @@ import warnings
 warnings.filterwarnings('ignore')
 ```
 
-    The autoreload extension is already loaded. To reload it, use:
-      %reload_ext autoreload
-
-
 
 ```python
 one_random_student(mccalister)
 ```
 
-    Karim
+    Matt
 
 
-Even with tensors of higher **rank**
+Tensors with higher numbers of dimensions have a higher **rank**, in the language of TensorFlow.
 
 A matrix with rows and columns only, like the black and white numbers, are **rank 2**.
 
@@ -174,7 +173,7 @@ While you **can leverage both**, here are a few comparisons.
 |------------|-------|-----------|
 | **Level of API** | high-level API | High and low-level APIs |
 | **Speed** |  can *seem* slower |  is a bit faster |
-| **Language architecture** | simple architecture, more readable and concise | straight tensorflow is a bit mroe complex |
+| **Language architecture** | simple architecture, more readable and concise | straight tensorflow is a bit more complex |
 | **Debugging** | less frequent need to debug | difficult to debug |
 | **Datasets** | usually used for small datasets | high performance models and large datasets that require fast execution|
 
@@ -183,11 +182,11 @@ This is also a _**non-issue**_ - as you can leverage tensorflow commands within 
 
 [reference link](https://www.edureka.co/blog/keras-vs-tensorflow-vs-pytorch/)
 
-### Think, Pair, Share Challenge:
+### Pair Challenge:
 
 <img src="https://images.pexels.com/photos/1350560/pexels-photo-1350560.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="diabetes" style ="text-align:center;width:250px;float:none" ></br>
 
-Let's begin implementing our neural net with the UCI digit dataset we imported from sklearn yesterday.
+Let's use a Keras neural net on the UCI digit dataset we imported from sklearn yesterday.
 
 Let's continue where we left off with our numbers dataset.
 
@@ -265,7 +264,7 @@ model.fit(data, labels, epochs=, batch_size=  )
 ```
 
 
-      File "<ipython-input-171-990b674031ad>", line 2
+      File "<ipython-input-12-990b674031ad>", line 2
         model.add(Dense(   , activation= , input_dim= ))
                            ^
     SyntaxError: invalid syntax
@@ -287,131 +286,48 @@ model.compile(optimizer='rmsprop' ,
 model.fit(X, y_binary, epochs=50, batch_size= 10 )
 ```
 
-    Epoch 1/50
-    1797/1797 [==============================] - 2s 1ms/step - loss: 0.5585 - acc: 0.7446
-    Epoch 2/50
-    1797/1797 [==============================] - 0s 203us/step - loss: 0.2448 - acc: 0.9009
-    Epoch 3/50
-    1797/1797 [==============================] - 0s 198us/step - loss: 0.1640 - acc: 0.9349
-    Epoch 4/50
-    1797/1797 [==============================] - 0s 177us/step - loss: 0.1305 - acc: 0.9482
-    Epoch 5/50
-    1797/1797 [==============================] - 0s 177us/step - loss: 0.1068 - acc: 0.9638
-    Epoch 6/50
-    1797/1797 [==============================] - 0s 167us/step - loss: 0.0902 - acc: 0.9705
-    Epoch 7/50
-    1797/1797 [==============================] - 0s 159us/step - loss: 0.0793 - acc: 0.9716
-    Epoch 8/50
-    1797/1797 [==============================] - 0s 190us/step - loss: 0.0715 - acc: 0.9766
-    Epoch 9/50
-    1797/1797 [==============================] - 0s 179us/step - loss: 0.0621 - acc: 0.9789
-    Epoch 10/50
-    1797/1797 [==============================] - 0s 160us/step - loss: 0.0564 - acc: 0.9794
-    Epoch 11/50
-    1797/1797 [==============================] - 0s 157us/step - loss: 0.0516 - acc: 0.9822
-    Epoch 12/50
-    1797/1797 [==============================] - 0s 196us/step - loss: 0.0475 - acc: 0.9822
-    Epoch 13/50
-    1797/1797 [==============================] - 0s 168us/step - loss: 0.0417 - acc: 0.9861
-    Epoch 14/50
-    1797/1797 [==============================] - 0s 168us/step - loss: 0.0402 - acc: 0.9855
-    Epoch 15/50
-    1797/1797 [==============================] - 0s 203us/step - loss: 0.0351 - acc: 0.9894
-    Epoch 16/50
-    1797/1797 [==============================] - 0s 164us/step - loss: 0.0324 - acc: 0.9878
-    Epoch 17/50
-    1797/1797 [==============================] - 0s 175us/step - loss: 0.0292 - acc: 0.9905
-    Epoch 18/50
-    1797/1797 [==============================] - 0s 181us/step - loss: 0.0276 - acc: 0.9894
-    Epoch 19/50
-    1797/1797 [==============================] - 0s 164us/step - loss: 0.0248 - acc: 0.9905
-    Epoch 20/50
-    1797/1797 [==============================] - 0s 186us/step - loss: 0.0239 - acc: 0.9939
-    Epoch 21/50
-    1797/1797 [==============================] - 0s 179us/step - loss: 0.0211 - acc: 0.9933
-    Epoch 22/50
-    1797/1797 [==============================] - 0s 180us/step - loss: 0.0206 - acc: 0.9922
-    Epoch 23/50
-    1797/1797 [==============================] - 0s 164us/step - loss: 0.0193 - acc: 0.9922
-    Epoch 24/50
-    1797/1797 [==============================] - 0s 175us/step - loss: 0.0188 - acc: 0.9939
-    Epoch 25/50
-    1797/1797 [==============================] - 0s 172us/step - loss: 0.0142 - acc: 0.9972
-    Epoch 26/50
-    1797/1797 [==============================] - 0s 164us/step - loss: 0.0139 - acc: 0.9950
-    Epoch 27/50
-    1797/1797 [==============================] - 0s 160us/step - loss: 0.0117 - acc: 0.9967
-    Epoch 28/50
-    1797/1797 [==============================] - 0s 190us/step - loss: 0.0116 - acc: 0.9961
-    Epoch 29/50
-    1797/1797 [==============================] - 0s 186us/step - loss: 0.0106 - acc: 0.9950
-    Epoch 30/50
-    1797/1797 [==============================] - 0s 187us/step - loss: 0.0092 - acc: 0.9972
-    Epoch 31/50
-    1797/1797 [==============================] - 0s 193us/step - loss: 0.0120 - acc: 0.9955
-    Epoch 32/50
-    1797/1797 [==============================] - 0s 206us/step - loss: 0.0094 - acc: 0.9967
-    Epoch 33/50
-    1797/1797 [==============================] - 0s 218us/step - loss: 0.0082 - acc: 0.9983
-    Epoch 34/50
-    1797/1797 [==============================] - 0s 189us/step - loss: 0.0058 - acc: 0.9978
-    Epoch 35/50
-    1797/1797 [==============================] - 0s 176us/step - loss: 0.0081 - acc: 0.9972
-    Epoch 36/50
-    1797/1797 [==============================] - 0s 195us/step - loss: 0.0067 - acc: 0.9972
-    Epoch 37/50
-    1797/1797 [==============================] - 0s 181us/step - loss: 0.0066 - acc: 0.9983
-    Epoch 38/50
-    1797/1797 [==============================] - 0s 187us/step - loss: 0.0052 - acc: 0.9983
-    Epoch 39/50
-    1797/1797 [==============================] - 0s 203us/step - loss: 0.0035 - acc: 0.9989
-    Epoch 40/50
-    1797/1797 [==============================] - 0s 181us/step - loss: 0.0064 - acc: 0.9978
-    Epoch 41/50
-    1797/1797 [==============================] - 0s 178us/step - loss: 0.0043 - acc: 0.9972
-    Epoch 42/50
-    1797/1797 [==============================] - 0s 202us/step - loss: 0.0041 - acc: 0.9989
-    Epoch 43/50
-    1797/1797 [==============================] - 0s 199us/step - loss: 0.0037 - acc: 0.9994
-    Epoch 44/50
-    1797/1797 [==============================] - 0s 194us/step - loss: 0.0044 - acc: 0.9989
-    Epoch 45/50
-    1797/1797 [==============================] - 0s 222us/step - loss: 0.0041 - acc: 0.9989
-    Epoch 46/50
-    1797/1797 [==============================] - 0s 185us/step - loss: 0.0056 - acc: 0.9983
-    Epoch 47/50
-    1797/1797 [==============================] - 0s 191us/step - loss: 0.0027 - acc: 0.9994
-    Epoch 48/50
-    1797/1797 [==============================] - 0s 201us/step - loss: 0.0031 - acc: 0.9994
-    Epoch 49/50
-    1797/1797 [==============================] - 0s 167us/step - loss: 0.0023 - acc: 0.9994
-    Epoch 50/50
-    1797/1797 [==============================] - 0s 173us/step - loss: 0.0034 - acc: 0.9994
+
+    ---------------------------------------------------------------------------
+
+    NameError                                 Traceback (most recent call last)
+
+    <ipython-input-14-a125b243e4fe> in <module>
+          1 #__SOLUTION__
+          2 
+    ----> 3 model = Sequential()
+          4 model.add(Dense(12, activation='relu', input_dim=64,))
+          5 model.add(Dense(8 ,  activation='relu' ))
 
 
-
-
-
-    <keras.callbacks.History at 0x1a60c6cda0>
-
+    NameError: name 'Sequential' is not defined
 
 
 ### Things to know:
 - the data and labels in `fit()` need to be numpy arrays, not pandas dfs. Else it won't work.
 - Scaling your data will have a large impact on your model.   
-  > For our traditional input features, we would use a scalar object.  For images, as long as the minimum value is 0, we can simply divide through by the maximum pixel intensity.
+   > For our traditional input features, we would use a scalar object.  For images, as long as the minimum value is 0, we can simply divide through by the maximum pixel intensity.
 
 ![gif](https://media0.giphy.com/media/3og0IMJcSI8p6hYQXS/giphy.gif)
 
+
+We have come across several scenerios where scaling is important. In addition to improving the speed of gradient descent, what other scenarios did we stress scaling?
+
+
+```python
+one_random_student(mccalister)
+```
+
+    Amanda
+
+
 #### Getting data ready for modeling
-**Tasks**:
+**Preprocessing**:
 
 - use train_test_split to create X_train, y_train, X_test, and y_test
 - Split training data into train and validation sets.
 - Scale the pixel intensity to a value between 0 and 1.
 - Scale the pixel intensity to a value between 0 and 1.
 
-Scaling data for neural networks is very important, whether it be for image processing or prediction problems like we've seen in past projects and lessons.  
 
 Scaling our input variables will help speed up our neural network [see 4.3](http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf)
 
@@ -419,12 +335,7 @@ Since our minimum intensity is 0, we can normalize the inputs by dividing each v
 
 
 ```python
-# Your code here
-```
 
-
-```python
-#__SOLUTION__
 from sklearn.model_selection import train_test_split
 
 X_train, X_test, y_train, y_test = train_test_split(X, y_binary, random_state=42, test_size=.2)
@@ -433,12 +344,16 @@ X_t, X_val, X_test = X_t/16, X_val/16, X_test/16
 
 ```
 
-Now that our data is ready, let's load in keras
+Now that our data is ready, let's load in the keras Sequential class.  
+
+Sequential refers to a sequence of layers that feed directly into one another with exactly [one input tensor and one output tensor](https://www.tensorflow.org/guide/keras/sequential_model)
 
 
 ```python
 from keras.models import Sequential
 ```
+
+A dense layer receives input from every node from the previous layer.
 
 
 ```python
@@ -453,11 +368,14 @@ For activation, let's start with the familiar sigmoid function, and see how it p
 ```python
 np.random.seed(42)
 model = Sequential()
+# We will start with our trusty sigmoid function.
+# What does input dimension correspond to?
 model.add(Dense(12, activation='sigmoid', input_dim=64,))
 model.add(Dense(8 ,  activation='sigmoid' ))
 model.add(Dense(1 , activation = 'sigmoid' ))
 
 model.compile(optimizer='SGD' ,
+              # We use binary_crossentropy for a binary loss function
               loss='binary_crossentropy'  ,
               metrics=['accuracy'])
 
@@ -466,25 +384,69 @@ results = model.fit(X_t, y_t, epochs=10, batch_size=100, verbose=1)
 ```
 
     Epoch 1/10
-    1149/1149 [==============================] - 2s 2ms/step - loss: 0.7928 - acc: 0.5039
+    1149/1149 [==============================] - 0s 121us/step - loss: 0.7928 - acc: 0.5039
     Epoch 2/10
-    1149/1149 [==============================] - 0s 20us/step - loss: 0.7743 - acc: 0.5039
+    1149/1149 [==============================] - 0s 11us/step - loss: 0.7743 - acc: 0.5039
     Epoch 3/10
-    1149/1149 [==============================] - 0s 19us/step - loss: 0.7593 - acc: 0.5039
+    1149/1149 [==============================] - 0s 11us/step - loss: 0.7593 - acc: 0.5039
     Epoch 4/10
-    1149/1149 [==============================] - 0s 19us/step - loss: 0.7465 - acc: 0.5039
+    1149/1149 [==============================] - 0s 12us/step - loss: 0.7465 - acc: 0.5039
     Epoch 5/10
-    1149/1149 [==============================] - 0s 22us/step - loss: 0.7360 - acc: 0.5039
+    1149/1149 [==============================] - 0s 12us/step - loss: 0.7360 - acc: 0.5039
     Epoch 6/10
-    1149/1149 [==============================] - 0s 23us/step - loss: 0.7273 - acc: 0.5039
+    1149/1149 [==============================] - 0s 15us/step - loss: 0.7273 - acc: 0.5039
     Epoch 7/10
-    1149/1149 [==============================] - 0s 22us/step - loss: 0.7200 - acc: 0.5039
+    1149/1149 [==============================] - 0s 12us/step - loss: 0.7200 - acc: 0.5039
     Epoch 8/10
-    1149/1149 [==============================] - 0s 23us/step - loss: 0.7143 - acc: 0.5039
+    1149/1149 [==============================] - 0s 11us/step - loss: 0.7143 - acc: 0.5039
     Epoch 9/10
-    1149/1149 [==============================] - 0s 23us/step - loss: 0.7094 - acc: 0.5039
+    1149/1149 [==============================] - 0s 16us/step - loss: 0.7094 - acc: 0.5039
     Epoch 10/10
-    1149/1149 [==============================] - 0s 23us/step - loss: 0.7057 - acc: 0.5039
+    1149/1149 [==============================] - 0s 13us/step - loss: 0.7057 - acc: 0.5039
+
+
+We can access the history of our model via `results.history`.
+Use __dict__ to take a tour.
+
+
+```python
+results.__dict__
+```
+
+
+
+
+    {'validation_data': [],
+     'model': <keras.engine.sequential.Sequential at 0x1a31f2b9b0>,
+     'params': {'batch_size': 100,
+      'epochs': 10,
+      'steps': None,
+      'samples': 1149,
+      'verbose': 1,
+      'do_validation': False,
+      'metrics': ['loss', 'acc']},
+     'epoch': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+     'history': {'loss': [0.7928334127518278,
+       0.7742922526011786,
+       0.7593016322018065,
+       0.7464719206172554,
+       0.7359635693493669,
+       0.7273100739567046,
+       0.7200160783409969,
+       0.7143256384668607,
+       0.7094395855803195,
+       0.7056822007484702],
+      'acc': [0.5039164503311675,
+       0.5039164402154968,
+       0.5039164425498823,
+       0.503916435183599,
+       0.5039164403711225,
+       0.5039164400339334,
+       0.5039164467517763,
+       0.5039164456364588,
+       0.5039164412011262,
+       0.5039164467517763]}}
+
 
 
 
@@ -505,15 +467,28 @@ sns.lineplot(results.epoch, results.history['acc'], ax=ax2, label='accuracy')
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a78466438>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a327908d0>
 
 
 
 
-![png](index_files/index_50_1.png)
+![png](index_files/index_54_1.png)
 
 
-If we look at our loss, it is still decreasing. That is a signal that our model is still learning. If our model is still learning, we can allow it to get better by increasing the number of epochs.
+We have two plots above both relating to the quality fo our model.  The left-hand plot is our loss. It uses the probabilities associated with our predictions to judge how well our prediction fits reality. We want it to decrease as far as possible.
+
+The accuracy judges how well the predictions are after applying the threshold at the output layer.  We want accuracy to increase.
+
+If we look at our loss, it is still decreasing. That is a signal that our model is **still learning**. If our model is still learning, we can allow it to get better by turning several dials. First, let's increase the number of epochs.
+
+
+```python
+# Review: what is an epoch?
+one_random_student(mccalister)
+```
+
+    Johnhoy
+
 
 
 ```python
@@ -527,109 +502,109 @@ model.compile(optimizer='SGD' ,
               metrics=['accuracy'])
 
 # Assign the variable history to store the results, and set verbose=1 so we can see the output.
-results = model.fit(X_t, y_t, epochs=50, batch_size=23, verbose=1)
+results = model.fit(X_t, y_t, epochs=50, batch_size=32, verbose=1)
 ```
 
     Epoch 1/50
-    1149/1149 [==============================] - 2s 2ms/step - loss: 0.7128 - acc: 0.4961
+    1149/1149 [==============================] - 0s 210us/step - loss: 0.7099 - acc: 0.5039
     Epoch 2/50
-    1149/1149 [==============================] - 0s 79us/step - loss: 0.6964 - acc: 0.4961
+    1149/1149 [==============================] - 0s 32us/step - loss: 0.6980 - acc: 0.5039
     Epoch 3/50
-    1149/1149 [==============================] - 0s 74us/step - loss: 0.6890 - acc: 0.4961
+    1149/1149 [==============================] - 0s 34us/step - loss: 0.6919 - acc: 0.5039
     Epoch 4/50
-    1149/1149 [==============================] - 0s 75us/step - loss: 0.6852 - acc: 0.4961
+    1149/1149 [==============================] - 0s 35us/step - loss: 0.6889 - acc: 0.5039
     Epoch 5/50
-    1149/1149 [==============================] - 0s 74us/step - loss: 0.6831 - acc: 0.5231
+    1149/1149 [==============================] - 0s 37us/step - loss: 0.6873 - acc: 0.5039
     Epoch 6/50
-    1149/1149 [==============================] - 0s 75us/step - loss: 0.6818 - acc: 0.6762
+    1149/1149 [==============================] - 0s 42us/step - loss: 0.6863 - acc: 0.5065
     Epoch 7/50
-    1149/1149 [==============================] - 0s 81us/step - loss: 0.6808 - acc: 0.7076
+    1149/1149 [==============================] - 0s 34us/step - loss: 0.6857 - acc: 0.5344
     Epoch 8/50
-    1149/1149 [==============================] - 0s 78us/step - loss: 0.6800 - acc: 0.7389
+    1149/1149 [==============================] - 0s 39us/step - loss: 0.6853 - acc: 0.5953
     Epoch 9/50
-    1149/1149 [==============================] - 0s 106us/step - loss: 0.6791 - acc: 0.7546
+    1149/1149 [==============================] - 0s 38us/step - loss: 0.6850 - acc: 0.6562
     Epoch 10/50
-    1149/1149 [==============================] - 0s 90us/step - loss: 0.6783 - acc: 0.7720
+    1149/1149 [==============================] - 0s 35us/step - loss: 0.6847 - acc: 0.6458
     Epoch 11/50
-    1149/1149 [==============================] - 0s 87us/step - loss: 0.6775 - acc: 0.7528
+    1149/1149 [==============================] - 0s 32us/step - loss: 0.6842 - acc: 0.6884
     Epoch 12/50
-    1149/1149 [==============================] - 0s 83us/step - loss: 0.6766 - acc: 0.7702
+    1149/1149 [==============================] - 0s 35us/step - loss: 0.6841 - acc: 0.6745
     Epoch 13/50
-    1149/1149 [==============================] - 0s 85us/step - loss: 0.6758 - acc: 0.7398
+    1149/1149 [==============================] - 0s 33us/step - loss: 0.6837 - acc: 0.7006
     Epoch 14/50
-    1149/1149 [==============================] - 0s 81us/step - loss: 0.6749 - acc: 0.7920
+    1149/1149 [==============================] - 0s 36us/step - loss: 0.6834 - acc: 0.6867
     Epoch 15/50
-    1149/1149 [==============================] - 0s 82us/step - loss: 0.6739 - acc: 0.7946
+    1149/1149 [==============================] - 0s 35us/step - loss: 0.6830 - acc: 0.7276
     Epoch 16/50
-    1149/1149 [==============================] - 0s 86us/step - loss: 0.6730 - acc: 0.7380
+    1149/1149 [==============================] - 0s 34us/step - loss: 0.6827 - acc: 0.7293
     Epoch 17/50
-    1149/1149 [==============================] - 0s 83us/step - loss: 0.6720 - acc: 0.8233
+    1149/1149 [==============================] - 0s 34us/step - loss: 0.6824 - acc: 0.7163
     Epoch 18/50
-    1149/1149 [==============================] - 0s 98us/step - loss: 0.6710 - acc: 0.7781
+    1149/1149 [==============================] - 0s 35us/step - loss: 0.6821 - acc: 0.7171
     Epoch 19/50
-    1149/1149 [==============================] - 0s 84us/step - loss: 0.6700 - acc: 0.8225
+    1149/1149 [==============================] - 0s 35us/step - loss: 0.6818 - acc: 0.7163
     Epoch 20/50
-    1149/1149 [==============================] - 0s 90us/step - loss: 0.6690 - acc: 0.8155
+    1149/1149 [==============================] - 0s 33us/step - loss: 0.6814 - acc: 0.7311
     Epoch 21/50
-    1149/1149 [==============================] - 0s 80us/step - loss: 0.6679 - acc: 0.8024
+    1149/1149 [==============================] - 0s 33us/step - loss: 0.6811 - acc: 0.7276
     Epoch 22/50
-    1149/1149 [==============================] - 0s 81us/step - loss: 0.6668 - acc: 0.8138
+    1149/1149 [==============================] - 0s 34us/step - loss: 0.6807 - acc: 0.7285
     Epoch 23/50
-    1149/1149 [==============================] - 0s 82us/step - loss: 0.6656 - acc: 0.7998
+    1149/1149 [==============================] - 0s 35us/step - loss: 0.6803 - acc: 0.7398
     Epoch 24/50
-    1149/1149 [==============================] - 0s 83us/step - loss: 0.6644 - acc: 0.8111
+    1149/1149 [==============================] - 0s 36us/step - loss: 0.6800 - acc: 0.7433
     Epoch 25/50
-    1149/1149 [==============================] - 0s 79us/step - loss: 0.6632 - acc: 0.8329
+    1149/1149 [==============================] - 0s 37us/step - loss: 0.6796 - acc: 0.7528
     Epoch 26/50
-    1149/1149 [==============================] - 0s 84us/step - loss: 0.6619 - acc: 0.8581
+    1149/1149 [==============================] - 0s 34us/step - loss: 0.6792 - acc: 0.7441
     Epoch 27/50
-    1149/1149 [==============================] - 0s 77us/step - loss: 0.6606 - acc: 0.8251
+    1149/1149 [==============================] - 0s 32us/step - loss: 0.6788 - acc: 0.7476
     Epoch 28/50
-    1149/1149 [==============================] - 0s 85us/step - loss: 0.6593 - acc: 0.8581
+    1149/1149 [==============================] - 0s 33us/step - loss: 0.6784 - acc: 0.7598
     Epoch 29/50
-    1149/1149 [==============================] - 0s 131us/step - loss: 0.6579 - acc: 0.8442
+    1149/1149 [==============================] - 0s 38us/step - loss: 0.6781 - acc: 0.7546
     Epoch 30/50
-    1149/1149 [==============================] - 0s 87us/step - loss: 0.6565 - acc: 0.8494
+    1149/1149 [==============================] - 0s 34us/step - loss: 0.6776 - acc: 0.7668
     Epoch 31/50
-    1149/1149 [==============================] - 0s 86us/step - loss: 0.6550 - acc: 0.8512
+    1149/1149 [==============================] - 0s 35us/step - loss: 0.6772 - acc: 0.7572
     Epoch 32/50
-    1149/1149 [==============================] - 0s 89us/step - loss: 0.6534 - acc: 0.8512
+    1149/1149 [==============================] - 0s 34us/step - loss: 0.6767 - acc: 0.7633
     Epoch 33/50
-    1149/1149 [==============================] - 0s 90us/step - loss: 0.6519 - acc: 0.8686
+    1149/1149 [==============================] - 0s 36us/step - loss: 0.6763 - acc: 0.7685
     Epoch 34/50
-    1149/1149 [==============================] - 0s 91us/step - loss: 0.6502 - acc: 0.8512
+    1149/1149 [==============================] - 0s 35us/step - loss: 0.6759 - acc: 0.7546
     Epoch 35/50
-    1149/1149 [==============================] - 0s 97us/step - loss: 0.6485 - acc: 0.8712
+    1149/1149 [==============================] - 0s 37us/step - loss: 0.6754 - acc: 0.7624
     Epoch 36/50
-    1149/1149 [==============================] - 0s 98us/step - loss: 0.6468 - acc: 0.8764
+    1149/1149 [==============================] - 0s 34us/step - loss: 0.6750 - acc: 0.7633
     Epoch 37/50
-    1149/1149 [==============================] - 0s 91us/step - loss: 0.6449 - acc: 0.8782
+    1149/1149 [==============================] - 0s 34us/step - loss: 0.6745 - acc: 0.7633
     Epoch 38/50
-    1149/1149 [==============================] - 0s 96us/step - loss: 0.6431 - acc: 0.8590
+    1149/1149 [==============================] - 0s 30us/step - loss: 0.6740 - acc: 0.7711
     Epoch 39/50
-    1149/1149 [==============================] - 0s 80us/step - loss: 0.6411 - acc: 0.8729
+    1149/1149 [==============================] - 0s 43us/step - loss: 0.6735 - acc: 0.7694
     Epoch 40/50
-    1149/1149 [==============================] - 0s 75us/step - loss: 0.6391 - acc: 0.8703
+    1149/1149 [==============================] - 0s 34us/step - loss: 0.6731 - acc: 0.7737
     Epoch 41/50
-    1149/1149 [==============================] - 0s 79us/step - loss: 0.6370 - acc: 0.8721
+    1149/1149 [==============================] - 0s 43us/step - loss: 0.6725 - acc: 0.7633
     Epoch 42/50
-    1149/1149 [==============================] - 0s 87us/step - loss: 0.6348 - acc: 0.8729
+    1149/1149 [==============================] - 0s 37us/step - loss: 0.6720 - acc: 0.7815
     Epoch 43/50
-    1149/1149 [==============================] - 0s 82us/step - loss: 0.6327 - acc: 0.8755
+    1149/1149 [==============================] - 0s 31us/step - loss: 0.6715 - acc: 0.7737
     Epoch 44/50
-    1149/1149 [==============================] - 0s 82us/step - loss: 0.6303 - acc: 0.8747
+    1149/1149 [==============================] - 0s 31us/step - loss: 0.6709 - acc: 0.7702
     Epoch 45/50
-    1149/1149 [==============================] - 0s 83us/step - loss: 0.6280 - acc: 0.8773
+    1149/1149 [==============================] - 0s 29us/step - loss: 0.6703 - acc: 0.7763
     Epoch 46/50
-    1149/1149 [==============================] - 0s 85us/step - loss: 0.6255 - acc: 0.8782
+    1149/1149 [==============================] - 0s 33us/step - loss: 0.6697 - acc: 0.7728
     Epoch 47/50
-    1149/1149 [==============================] - 0s 82us/step - loss: 0.6230 - acc: 0.8773
+    1149/1149 [==============================] - 0s 32us/step - loss: 0.6691 - acc: 0.7833
     Epoch 48/50
-    1149/1149 [==============================] - 0s 84us/step - loss: 0.6204 - acc: 0.8764
+    1149/1149 [==============================] - 0s 31us/step - loss: 0.6685 - acc: 0.7842
     Epoch 49/50
-    1149/1149 [==============================] - 0s 96us/step - loss: 0.6177 - acc: 0.8729
+    1149/1149 [==============================] - 0s 36us/step - loss: 0.6679 - acc: 0.7737
     Epoch 50/50
-    1149/1149 [==============================] - 0s 88us/step - loss: 0.6149 - acc: 0.8790
+    1149/1149 [==============================] - 0s 33us/step - loss: 0.6673 - acc: 0.7815
 
 
 
@@ -645,15 +620,17 @@ sns.lineplot(results.epoch, sigmoid_accuracy, ax=ax2, label='accuracy')
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a77863550>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a3536e470>
 
 
 
 
-![png](index_files/index_53_1.png)
+![png](index_files/index_59_1.png)
 
 
-It still looks like our model has not converged.  The loss is still decreasing, and the accuracy is still increasing.  We could continue increasing the epochs, but that will be time consuming.  
+It still looks like our model has not **converged**. Convergence is when our model has plateaued after adjusting the parameters to their optimal values. 
+
+The loss is still decreasing, and the accuracy is still increasing.  We could continue increasing the epochs, but that will be time consuming.  
 
 We could try decreasing the batch size. Let's set the batch size to 1.  This is true stochastic gradient descent.  The parameters are updated after each sample is passed into the model.
 
@@ -675,25 +652,25 @@ results = model.fit(X_t, y_t, epochs=10, batch_size=1, verbose=1)
 ```
 
     Epoch 1/10
-    1149/1149 [==============================] - 3s 2ms/step - loss: 0.6983 - acc: 0.5091
+    1149/1149 [==============================] - 1s 872us/step - loss: 0.6870 - acc: 0.5518
     Epoch 2/10
-    1149/1149 [==============================] - 1s 1ms/step - loss: 0.6957 - acc: 0.4891
+    1149/1149 [==============================] - 1s 762us/step - loss: 0.6685 - acc: 0.6806
     Epoch 3/10
-    1149/1149 [==============================] - 1s 1ms/step - loss: 0.6920 - acc: 0.5100
+    1149/1149 [==============================] - 1s 771us/step - loss: 0.6349 - acc: 0.7258
     Epoch 4/10
-    1149/1149 [==============================] - 1s 1ms/step - loss: 0.6854 - acc: 0.5579
+    1149/1149 [==============================] - 1s 744us/step - loss: 0.5775 - acc: 0.8085
     Epoch 5/10
-    1149/1149 [==============================] - 2s 1ms/step - loss: 0.6763 - acc: 0.6197
+    1149/1149 [==============================] - 1s 736us/step - loss: 0.4877 - acc: 0.8390
     Epoch 6/10
-    1149/1149 [==============================] - 2s 1ms/step - loss: 0.6572 - acc: 0.7076
+    1149/1149 [==============================] - 1s 750us/step - loss: 0.4023 - acc: 0.8555
     Epoch 7/10
-    1149/1149 [==============================] - 2s 1ms/step - loss: 0.6162 - acc: 0.7920
+    1149/1149 [==============================] - 1s 734us/step - loss: 0.3438 - acc: 0.8668
     Epoch 8/10
-    1149/1149 [==============================] - 2s 1ms/step - loss: 0.5365 - acc: 0.8251
+    1149/1149 [==============================] - 1s 775us/step - loss: 0.3078 - acc: 0.8834
     Epoch 9/10
-    1149/1149 [==============================] - 2s 1ms/step - loss: 0.4357 - acc: 0.8503
+    1149/1149 [==============================] - 1s 745us/step - loss: 0.2823 - acc: 0.8886
     Epoch 10/10
-    1149/1149 [==============================] - 2s 1ms/step - loss: 0.3608 - acc: 0.8686
+    1149/1149 [==============================] - 1s 759us/step - loss: 0.2660 - acc: 0.8886
 
 
 
@@ -709,17 +686,21 @@ sns.lineplot(results.epoch, sigmoid_one_accuracy, ax=ax2, label='accuracy')
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a48d6b400>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a33370748>
 
 
 
 
-![png](index_files/index_56_1.png)
+![png](index_files/index_62_1.png)
 
 
 Comparing our 50 epoch version with a 500 batch size and a 10 epoch version with a 1 example batch size, we see that by 10 epochs, the latter has achieved 90% accuracy by the final epoch, while our 23 batch size is just about 70%.  However, with the 1 example batch, each epoch took a lot longer.
 
 Still, even though the 2nd model reached a higher accuracy and lower loss, it looks like it still has not stopped learning. The slope of the loss is getting smaller, but it has not leveled out completely.
+
+From yesterday's lesson, you may remember that the vanilla SGD optimizer applies a constant learning rate accross all values.  Let's look at the default value.  
+
+If we increase the learning rate, our parameter adjustments will take bigger steps, allowing us to proceed more quickly down the gradient.
 
 
 ```python
@@ -741,47 +722,55 @@ results = model.fit(X_t, y_t, epochs=10, batch_size=1, verbose=1)
 ```
 
     Epoch 1/10
-    1149/1149 [==============================] - 4s 3ms/step - loss: 0.6922 - acc: 0.5370
+    1149/1149 [==============================] - 1s 931us/step - loss: 0.6910 - acc: 0.5152
     Epoch 2/10
-    1149/1149 [==============================] - 2s 2ms/step - loss: 0.6586 - acc: 0.6501
+    1149/1149 [==============================] - 1s 766us/step - loss: 0.6618 - acc: 0.6641
     Epoch 3/10
-    1149/1149 [==============================] - 2s 2ms/step - loss: 0.5514 - acc: 0.7868A: 0s - loss: 0.5544 - acc: 0.7
+    1149/1149 [==============================] - 1s 792us/step - loss: 0.5567 - acc: 0.7981
     Epoch 4/10
-    1149/1149 [==============================] - 2s 2ms/step - loss: 0.3887 - acc: 0.8590
+    1149/1149 [==============================] - 1s 769us/step - loss: 0.3958 - acc: 0.8381
     Epoch 5/10
-    1149/1149 [==============================] - 2s 2ms/step - loss: 0.3094 - acc: 0.8790
+    1149/1149 [==============================] - 1s 738us/step - loss: 0.3101 - acc: 0.8816
     Epoch 6/10
-    1149/1149 [==============================] - 2s 1ms/step - loss: 0.2706 - acc: 0.8930
+    1149/1149 [==============================] - 1s 792us/step - loss: 0.2702 - acc: 0.8886
     Epoch 7/10
-    1149/1149 [==============================] - 2s 2ms/step - loss: 0.2493 - acc: 0.8964
+    1149/1149 [==============================] - 1s 735us/step - loss: 0.2504 - acc: 0.8956
     Epoch 8/10
-    1149/1149 [==============================] - 2s 2ms/step - loss: 0.2363 - acc: 0.8964
+    1149/1149 [==============================] - 1s 751us/step - loss: 0.2347 - acc: 0.9025
     Epoch 9/10
-    1149/1149 [==============================] - 2s 2ms/step - loss: 0.2279 - acc: 0.9069
+    1149/1149 [==============================] - 1s 757us/step - loss: 0.2214 - acc: 0.9060
     Epoch 10/10
-    1149/1149 [==============================] - 2s 2ms/step - loss: 0.2218 - acc: 0.9034
+    1149/1149 [==============================] - 1s 763us/step - loss: 0.2119 - acc: 0.9104
 
 
 
 ```python
-relu_loss = results.history['loss']
-relu_accuracy = results.history['acc']
+lr_02_loss = results.history['loss']
+lr_02_accuracy = results.history['acc']
 
 fig, (ax1, ax2) = plt.subplots(1,2, figsize=(10,5))
-sns.lineplot(results.epoch, relu_loss, ax=ax1, label='loss')
-sns.lineplot(results.epoch, relu_accuracy, ax=ax2, label='accuracy')
+sns.lineplot(results.epoch, lr_02_loss, ax=ax1, label='lr_02_loss')
+sns.lineplot(results.epoch, lr_02_accuracy, ax=ax2, label='lr_02_accuracy')
+
+sns.lineplot(results.epoch,sigmoid_one_loss, ax=ax1, label='lr_01_loss')
+sns.lineplot(results.epoch, sigmoid_one_accuracy, ax=ax2, label='lr_01_accuracy')
+
+
+
 ```
 
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a7890d588>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a33f15c18>
 
 
 
 
-![png](index_files/index_60_1.png)
+![png](index_files/index_67_1.png)
 
+
+If we increase the learning rate to a very high number, we see that our model overshoots the minimum, and starts bouncing all around.
 
 
 ```python
@@ -799,7 +788,7 @@ model.compile(optimizer=sgd ,
               metrics=['accuracy'])
 
 # Assign the variable history to store the results, and set verbose=1 so we can see the output.
-results = model.fit(X_t, y_t, epochs=30, batch_size=32, verbose=1)
+results = model.fit(X_t, y_t, epochs=30, batch_size=10, verbose=1)
 
 relu_loss = results.history['loss']
 relu_accuracy = results.history['acc']
@@ -810,76 +799,76 @@ sns.lineplot(results.epoch, relu_accuracy, ax=ax2, label='accuracy')
 ```
 
     Epoch 1/30
-    1149/1149 [==============================] - 2s 2ms/step - loss: 1.0823 - acc: 0.4830
+    1149/1149 [==============================] - 0s 344us/step - loss: 0.9546 - acc: 0.5283
     Epoch 2/30
-    1149/1149 [==============================] - 0s 63us/step - loss: 0.8540 - acc: 0.5022
+    1149/1149 [==============================] - 0s 86us/step - loss: 0.9878 - acc: 0.4909
     Epoch 3/30
-    1149/1149 [==============================] - 0s 62us/step - loss: 0.8703 - acc: 0.5335
+    1149/1149 [==============================] - 0s 98us/step - loss: 0.9413 - acc: 0.5257
     Epoch 4/30
-    1149/1149 [==============================] - 0s 62us/step - loss: 1.0088 - acc: 0.4926
+    1149/1149 [==============================] - 0s 99us/step - loss: 1.1088 - acc: 0.4865
     Epoch 5/30
-    1149/1149 [==============================] - 0s 72us/step - loss: 0.8866 - acc: 0.4970
+    1149/1149 [==============================] - 0s 92us/step - loss: 1.0151 - acc: 0.4970
     Epoch 6/30
-    1149/1149 [==============================] - 0s 60us/step - loss: 0.9379 - acc: 0.4804
+    1149/1149 [==============================] - 0s 87us/step - loss: 1.0805 - acc: 0.4795
     Epoch 7/30
-    1149/1149 [==============================] - 0s 61us/step - loss: 0.8235 - acc: 0.5048
+    1149/1149 [==============================] - 0s 83us/step - loss: 1.1492 - acc: 0.4865
     Epoch 8/30
-    1149/1149 [==============================] - 0s 70us/step - loss: 0.7988 - acc: 0.5222
+    1149/1149 [==============================] - 0s 99us/step - loss: 1.0375 - acc: 0.4909
     Epoch 9/30
-    1149/1149 [==============================] - 0s 62us/step - loss: 0.9850 - acc: 0.4648
+    1149/1149 [==============================] - 0s 98us/step - loss: 1.0884 - acc: 0.4891
     Epoch 10/30
-    1149/1149 [==============================] - 0s 85us/step - loss: 0.8171 - acc: 0.5065
+    1149/1149 [==============================] - 0s 92us/step - loss: 1.1105 - acc: 0.4874
     Epoch 11/30
-    1149/1149 [==============================] - 0s 77us/step - loss: 0.9355 - acc: 0.5004
+    1149/1149 [==============================] - 0s 92us/step - loss: 0.9936 - acc: 0.5048
     Epoch 12/30
-    1149/1149 [==============================] - 0s 77us/step - loss: 0.9954 - acc: 0.4708
+    1149/1149 [==============================] - 0s 101us/step - loss: 0.9538 - acc: 0.5091
     Epoch 13/30
-    1149/1149 [==============================] - 0s 70us/step - loss: 0.8110 - acc: 0.5065
+    1149/1149 [==============================] - 0s 94us/step - loss: 1.1038 - acc: 0.4743
     Epoch 14/30
-    1149/1149 [==============================] - 0s 68us/step - loss: 0.8468 - acc: 0.5100
+    1149/1149 [==============================] - 0s 94us/step - loss: 1.0204 - acc: 0.4978
     Epoch 15/30
-    1149/1149 [==============================] - 0s 65us/step - loss: 0.7681 - acc: 0.5196
+    1149/1149 [==============================] - 0s 105us/step - loss: 0.9248 - acc: 0.5161
     Epoch 16/30
-    1149/1149 [==============================] - 0s 73us/step - loss: 0.7550 - acc: 0.5257
+    1149/1149 [==============================] - 0s 121us/step - loss: 1.0313 - acc: 0.4970
     Epoch 17/30
-    1149/1149 [==============================] - 0s 71us/step - loss: 0.8692 - acc: 0.4909
+    1149/1149 [==============================] - 0s 100us/step - loss: 1.0695 - acc: 0.4778
     Epoch 18/30
-    1149/1149 [==============================] - 0s 64us/step - loss: 0.9378 - acc: 0.4935
+    1149/1149 [==============================] - 0s 97us/step - loss: 1.0230 - acc: 0.4917
     Epoch 19/30
-    1149/1149 [==============================] - 0s 61us/step - loss: 0.9189 - acc: 0.4830
+    1149/1149 [==============================] - 0s 100us/step - loss: 1.1192 - acc: 0.4856
     Epoch 20/30
-    1149/1149 [==============================] - 0s 66us/step - loss: 1.0753 - acc: 0.4552
+    1149/1149 [==============================] - 0s 91us/step - loss: 0.9462 - acc: 0.5013
     Epoch 21/30
-    1149/1149 [==============================] - 0s 72us/step - loss: 1.0114 - acc: 0.4752
+    1149/1149 [==============================] - 0s 125us/step - loss: 0.9969 - acc: 0.5083
     Epoch 22/30
-    1149/1149 [==============================] - 0s 76us/step - loss: 0.8504 - acc: 0.4978
+    1149/1149 [==============================] - 0s 100us/step - loss: 0.9611 - acc: 0.5074
     Epoch 23/30
-    1149/1149 [==============================] - 0s 80us/step - loss: 0.8621 - acc: 0.4987
+    1149/1149 [==============================] - 0s 103us/step - loss: 1.0848 - acc: 0.4804
     Epoch 24/30
-    1149/1149 [==============================] - 0s 64us/step - loss: 0.9982 - acc: 0.4743
+    1149/1149 [==============================] - 0s 98us/step - loss: 0.9954 - acc: 0.5022
     Epoch 25/30
-    1149/1149 [==============================] - 0s 64us/step - loss: 1.0312 - acc: 0.4726
+    1149/1149 [==============================] - 0s 99us/step - loss: 0.9754 - acc: 0.5013
     Epoch 26/30
-    1149/1149 [==============================] - 0s 67us/step - loss: 0.8277 - acc: 0.5039
+    1149/1149 [==============================] - 0s 96us/step - loss: 0.9596 - acc: 0.5109
     Epoch 27/30
-    1149/1149 [==============================] - 0s 64us/step - loss: 0.8702 - acc: 0.5109
+    1149/1149 [==============================] - 0s 86us/step - loss: 0.9614 - acc: 0.5144
     Epoch 28/30
-    1149/1149 [==============================] - 0s 63us/step - loss: 0.7832 - acc: 0.5431
+    1149/1149 [==============================] - 0s 89us/step - loss: 1.0154 - acc: 0.5074
     Epoch 29/30
-    1149/1149 [==============================] - 0s 61us/step - loss: 0.8858 - acc: 0.4943
+    1149/1149 [==============================] - 0s 89us/step - loss: 0.9779 - acc: 0.4917
     Epoch 30/30
-    1149/1149 [==============================] - 0s 75us/step - loss: 0.8511 - acc: 0.4900
+    1149/1149 [==============================] - 0s 112us/step - loss: 0.9510 - acc: 0.4996
 
 
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a7c4d9da0>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a3447df98>
 
 
 
 
-![png](index_files/index_61_2.png)
+![png](index_files/index_69_2.png)
 
 
 Let's get a bit more modern, and apply a relu activation function in our layers.
@@ -912,13 +901,17 @@ sns.lineplot(results.epoch, relu_accuracy, ax=ax2, label='accuracy')
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a48f6a518>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a34e9fdd8>
 
 
 
 
-![png](index_files/index_64_1.png)
+![png](index_files/index_72_1.png)
 
+
+Compared to our original sigmoid with 50 epochs and batch 32, the relu activation reaches a much higher accuracy
+
+Let's try batch size 1
 
 
 ```python
@@ -936,25 +929,25 @@ results = model.fit(X_t, y_t, epochs=10, batch_size= 1, verbose=1)
 ```
 
     Epoch 1/10
-    1149/1149 [==============================] - 3s 2ms/step - loss: 0.5115 - acc: 0.7424
+    1149/1149 [==============================] - 1s 994us/step - loss: 0.4985 - acc: 0.7772
     Epoch 2/10
-    1149/1149 [==============================] - 1s 1ms/step - loss: 0.2565 - acc: 0.8938
+    1149/1149 [==============================] - 1s 809us/step - loss: 0.3385 - acc: 0.8808
     Epoch 3/10
-    1149/1149 [==============================] - 2s 1ms/step - loss: 0.2175 - acc: 0.9156
+    1149/1149 [==============================] - 1s 797us/step - loss: 0.2547 - acc: 0.9138 0s - loss: 0.2830
     Epoch 4/10
-    1149/1149 [==============================] - 2s 1ms/step - loss: 0.1797 - acc: 0.9252
+    1149/1149 [==============================] - 1s 781us/step - loss: 0.2057 - acc: 0.9304
     Epoch 5/10
-    1149/1149 [==============================] - 2s 1ms/step - loss: 0.1553 - acc: 0.9373
+    1149/1149 [==============================] - 1s 798us/step - loss: 0.1799 - acc: 0.9321
     Epoch 6/10
-    1149/1149 [==============================] - 2s 1ms/step - loss: 0.1380 - acc: 0.9426
+    1149/1149 [==============================] - 1s 775us/step - loss: 0.1458 - acc: 0.9504
     Epoch 7/10
-    1149/1149 [==============================] - 2s 1ms/step - loss: 0.1094 - acc: 0.9521
+    1149/1149 [==============================] - 1s 839us/step - loss: 0.1347 - acc: 0.9521
     Epoch 8/10
-    1149/1149 [==============================] - 2s 2ms/step - loss: 0.0938 - acc: 0.9661
+    1149/1149 [==============================] - 1s 770us/step - loss: 0.1170 - acc: 0.9565
     Epoch 9/10
-    1149/1149 [==============================] - 2s 1ms/step - loss: 0.0828 - acc: 0.9704
+    1149/1149 [==============================] - 1s 783us/step - loss: 0.1061 - acc: 0.9661
     Epoch 10/10
-    1149/1149 [==============================] - 2s 2ms/step - loss: 0.0710 - acc: 0.9730
+    1149/1149 [==============================] - 1s 826us/step - loss: 0.1021 - acc: 0.9634: 0s - loss: 0.1051
 
 
 
@@ -970,12 +963,12 @@ sns.lineplot(results.epoch, relu_accuracy, ax=ax2, label='accuracy')
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a4951c160>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a3584fcc0>
 
 
 
 
-![png](index_files/index_66_1.png)
+![png](index_files/index_76_1.png)
 
 
 We are reaching a high accuracy, but still looks like our model has not converged. If we increased our number of epochs, we would be looking at a long wait.
@@ -1007,12 +1000,12 @@ sns.lineplot(results.epoch, relu_accuracy, ax=ax2, label='accuracy')
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a4a522f28>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a373d8e80>
 
 
 
 
-![png](index_files/index_69_1.png)
+![png](index_files/index_79_1.png)
 
 
 Now our accuracy is really improving, and it looks like our learning may be leveling out.
@@ -1044,12 +1037,12 @@ sns.lineplot(results.epoch, adam_accuracy, ax=ax2, label='accuracy')
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a49d8edd8>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a37d506d8>
 
 
 
 
-![png](index_files/index_72_1.png)
+![png](index_files/index_82_1.png)
 
 
 No it looks like we're getting somewhere.
@@ -1084,12 +1077,12 @@ sns.lineplot(results.epoch, sgd_accuracy, ax=ax2, label='sgd_accuracy')
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a4aafc1d0>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a3844b3c8>
 
 
 
 
-![png](index_files/index_74_1.png)
+![png](index_files/index_84_1.png)
 
 
 We have been looking only at our training set. Let's add in our validation set to the picture.
@@ -1102,7 +1095,7 @@ model.add(Dense(8 ,  activation='relu' ))
 model.add(Dense(4 ,  activation='relu' ))
 model.add(Dense(1 , activation = 'sigmoid' ))
 
-model.compile(optimizer='SGD',
+model.compile(optimizer='adam',
               loss='binary_crossentropy',
               metrics=['accuracy'])
 
@@ -1124,12 +1117,12 @@ sns.lineplot(results.epoch, val_acc, ax=ax2, label='val_accuracy')
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a48d2d9b0>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a38da2da0>
 
 
 
 
-![png](index_files/index_76_1.png)
+![png](index_files/index_86_1.png)
 
 
 Consider that we still see our loss decreasing and our accuracy increasing.  We try to add more complexity to our model by adding more layers.
@@ -1172,12 +1165,12 @@ sns.lineplot(results.epoch, val_acc, ax=ax2, label='val_accuracy')
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a76c31898>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a39947208>
 
 
 
 
-![png](index_files/index_78_1.png)
+![png](index_files/index_88_1.png)
 
 
 
@@ -1215,15 +1208,17 @@ sns.lineplot(results.epoch, val_acc, ax=ax2, label='val_accuracy')
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a509baf98>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a3a384828>
 
 
 
 
-![png](index_files/index_79_1.png)
+![png](index_files/index_89_1.png)
 
 
-We see that our model is overfit.  Just like in our previous models, after a certain amount of learning, the loss on the validation set starts increasing.
+In both models above, we see that our loss has begun to increase slightly. 
+
+This is a sign that our model is overfit.  Just like in our previous models, after a certain amount of learning, the loss on the validation set starts increasing.
 
 # Regularization
 
@@ -1277,12 +1272,12 @@ sns.lineplot(results.epoch, val_acc, ax=ax2, label='val_accuracy')
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a7f4fee80>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a3af6d5c0>
 
 
 
 
-![png](index_files/index_84_1.png)
+![png](index_files/index_94_1.png)
 
 
 
@@ -1323,13 +1318,19 @@ sns.lineplot(results.epoch, val_acc, ax=ax2, label='val_accuracy')
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a802689e8>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a3bed5208>
 
 
 
 
-![png](index_files/index_85_1.png)
+![png](index_files/index_95_1.png)
 
+
+# Dropout
+
+We can specify a dropout layer in keras, which randomly shuts off different nodes during training.
+
+![drop_out](img/drop_out.png)
 
 
 ```python
@@ -1342,11 +1343,11 @@ np.random.seed(42)
 
 model = Sequential()
 model.add(Dense(300, activation='relu', input_dim=64,))
-model.add(Dropout(.3))
+model.add(Dropout(.5))
 model.add(Dense(200 ,  activation='relu' ))
-model.add(Dropout(.2))
+model.add(Dropout(.5))
 model.add(Dense(80 ,  activation='relu' ))
-model.add(Dropout(.01))
+model.add(Dropout(.1))
 model.add(Dense(4 ,  activation='relu' ))
 model.add(Dense(1 , activation = 'sigmoid' ))
 
@@ -1373,21 +1374,25 @@ sns.lineplot(results.epoch, val_acc, ax=ax2, label='val_accuracy')
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a6420d320>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a3ae88ac8>
 
 
 
 
-![png](index_files/index_87_1.png)
+![png](index_files/index_98_1.png)
 
 
 # Early Stopping
+
+We can also tell our neural network to stop once it stops realizing any gain.
 
 
 ```python
 from keras.callbacks import EarlyStopping
 
 ```
+
+This is the model with no early stopping.
 
 
 ```python
@@ -1432,8 +1437,10 @@ sns.lineplot(results.epoch, val_acc, ax=ax2, label='val_accuracy')
 
 
 
-![png](index_files/index_90_1.png)
+![png](index_files/index_103_1.png)
 
+
+Here we tell it to stop once the a very small positive change in the validation loss occurs.
 
 
 ```python
@@ -1481,13 +1488,15 @@ sns.lineplot(results.epoch, val_acc, ax=ax2, label='val_accuracy')
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a8376f1d0>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a4118c1d0>
 
 
 
 
-![png](index_files/index_91_2.png)
+![png](index_files/index_105_2.png)
 
+
+That stopped too early.  We can specify the number of epochs that it doesn't see decrease in the loss with the `patience` parameter. 
 
 
 ```python
@@ -1535,13 +1544,15 @@ sns.lineplot(results.epoch, val_acc, ax=ax2, label='val_accuracy')
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x1a4e63ef28>
+    <matplotlib.axes._subplots.AxesSubplot at 0x1a424f0ef0>
 
 
 
 
-![png](index_files/index_92_2.png)
+![png](index_files/index_107_2.png)
 
+
+# Multiclass Classification and Softmax
 
 Now let's return to the original problem: predicting 0 through 9
 
@@ -1566,6 +1577,11 @@ X_t, X_val, X_test = X_t/16, X_val/16, X_test/16
 
 
 ```python
+For a multiclass output, our neural net expects our target to be in a certain form.
+```
+
+
+```python
 from sklearn.preprocessing import OneHotEncoder
 
 ohe = OneHotEncoder(sparse=False)
@@ -1573,6 +1589,16 @@ y_t = ohe.fit_transform(y_t.reshape(-1,1))
 y_val = ohe.transform(y_val.reshape(-1,1))
 y_test = ohe.transform(y_test.reshape(-1,1))
 ```
+
+What is different in the code below from the code above?
+
+
+```python
+one_random_student(mccalister)
+```
+
+    Adam
+
 
 
 ```python
@@ -1589,105 +1615,105 @@ results = model.fit(X_t, y_t, epochs=50, batch_size= 10, validation_data=(X_val,
 
     Train on 1149 samples, validate on 288 samples
     Epoch 1/50
-    1149/1149 [==============================] - 2s 2ms/step - loss: 2.2504 - acc: 0.2019 - val_loss: 2.1269 - val_acc: 0.3021
+    1149/1149 [==============================] - 1s 1ms/step - loss: 2.2511 - acc: 0.2037 - val_loss: 2.1275 - val_acc: 0.2813
     Epoch 2/50
-    1149/1149 [==============================] - 0s 226us/step - loss: 2.0117 - acc: 0.3029 - val_loss: 1.8210 - val_acc: 0.3403
+    1149/1149 [==============================] - 0s 161us/step - loss: 2.0132 - acc: 0.2942 - val_loss: 1.8250 - val_acc: 0.3403
     Epoch 3/50
-    1149/1149 [==============================] - 0s 230us/step - loss: 1.6898 - acc: 0.4439 - val_loss: 1.4530 - val_acc: 0.5556
+    1149/1149 [==============================] - 0s 159us/step - loss: 1.6929 - acc: 0.4291 - val_loss: 1.4559 - val_acc: 0.5451
     Epoch 4/50
-    1149/1149 [==============================] - 0s 246us/step - loss: 1.2976 - acc: 0.6240 - val_loss: 1.0906 - val_acc: 0.6806
+    1149/1149 [==============================] - 0s 155us/step - loss: 1.2981 - acc: 0.6240 - val_loss: 1.0919 - val_acc: 0.6771
     Epoch 5/50
-    1149/1149 [==============================] - 0s 230us/step - loss: 0.9716 - acc: 0.7076 - val_loss: 0.8386 - val_acc: 0.7188
+    1149/1149 [==============================] - 0s 160us/step - loss: 0.9735 - acc: 0.7050 - val_loss: 0.8405 - val_acc: 0.7222
     Epoch 6/50
-    1149/1149 [==============================] - 0s 228us/step - loss: 0.7691 - acc: 0.7615 - val_loss: 0.6954 - val_acc: 0.7917
+    1149/1149 [==============================] - 0s 177us/step - loss: 0.7705 - acc: 0.7615 - val_loss: 0.6967 - val_acc: 0.7847
     Epoch 7/50
-    1149/1149 [==============================] - 0s 225us/step - loss: 0.6380 - acc: 0.8207 - val_loss: 0.5773 - val_acc: 0.8125
+    1149/1149 [==============================] - 0s 204us/step - loss: 0.6380 - acc: 0.8198 - val_loss: 0.5776 - val_acc: 0.8194
     Epoch 8/50
-    1149/1149 [==============================] - 0s 228us/step - loss: 0.5456 - acc: 0.8442 - val_loss: 0.4966 - val_acc: 0.8472
+    1149/1149 [==============================] - 0s 165us/step - loss: 0.5441 - acc: 0.8477 - val_loss: 0.4946 - val_acc: 0.8472
     Epoch 9/50
-    1149/1149 [==============================] - 0s 209us/step - loss: 0.4752 - acc: 0.8634 - val_loss: 0.4744 - val_acc: 0.8437
+    1149/1149 [==============================] - 0s 147us/step - loss: 0.4730 - acc: 0.8607 - val_loss: 0.4741 - val_acc: 0.8437
     Epoch 10/50
-    1149/1149 [==============================] - 0s 213us/step - loss: 0.4222 - acc: 0.8834 - val_loss: 0.3876 - val_acc: 0.8924
+    1149/1149 [==============================] - 0s 163us/step - loss: 0.4200 - acc: 0.8842 - val_loss: 0.3857 - val_acc: 0.8958
     Epoch 11/50
-    1149/1149 [==============================] - 0s 238us/step - loss: 0.3765 - acc: 0.9060 - val_loss: 0.3538 - val_acc: 0.9028
+    1149/1149 [==============================] - 0s 156us/step - loss: 0.3743 - acc: 0.9051 - val_loss: 0.3524 - val_acc: 0.8993
     Epoch 12/50
-    1149/1149 [==============================] - 0s 252us/step - loss: 0.3415 - acc: 0.9051 - val_loss: 0.3270 - val_acc: 0.9062
+    1149/1149 [==============================] - 0s 173us/step - loss: 0.3394 - acc: 0.9069 - val_loss: 0.3260 - val_acc: 0.9028
     Epoch 13/50
-    1149/1149 [==============================] - 0s 199us/step - loss: 0.3125 - acc: 0.9191 - val_loss: 0.3016 - val_acc: 0.9132
+    1149/1149 [==============================] - 0s 157us/step - loss: 0.3105 - acc: 0.9164 - val_loss: 0.3008 - val_acc: 0.9097
     Epoch 14/50
-    1149/1149 [==============================] - 0s 203us/step - loss: 0.2870 - acc: 0.9252 - val_loss: 0.2827 - val_acc: 0.9167
+    1149/1149 [==============================] - 0s 153us/step - loss: 0.2854 - acc: 0.9260 - val_loss: 0.2820 - val_acc: 0.9097
     Epoch 15/50
-    1149/1149 [==============================] - 0s 278us/step - loss: 0.2673 - acc: 0.9278 - val_loss: 0.2623 - val_acc: 0.9236
+    1149/1149 [==============================] - 0s 152us/step - loss: 0.2657 - acc: 0.9269 - val_loss: 0.2626 - val_acc: 0.9201
     Epoch 16/50
-    1149/1149 [==============================] - 0s 219us/step - loss: 0.2444 - acc: 0.9382 - val_loss: 0.2598 - val_acc: 0.9167
+    1149/1149 [==============================] - 0s 162us/step - loss: 0.2430 - acc: 0.9356 - val_loss: 0.2573 - val_acc: 0.9167
     Epoch 17/50
-    1149/1149 [==============================] - 0s 202us/step - loss: 0.2295 - acc: 0.9382 - val_loss: 0.2416 - val_acc: 0.9236
+    1149/1149 [==============================] - 0s 156us/step - loss: 0.2281 - acc: 0.9417 - val_loss: 0.2403 - val_acc: 0.9236
     Epoch 18/50
-    1149/1149 [==============================] - 0s 201us/step - loss: 0.2172 - acc: 0.9373 - val_loss: 0.2411 - val_acc: 0.9167
+    1149/1149 [==============================] - 0s 165us/step - loss: 0.2162 - acc: 0.9356 - val_loss: 0.2404 - val_acc: 0.9132
     Epoch 19/50
-    1149/1149 [==============================] - 0s 231us/step - loss: 0.2031 - acc: 0.9487 - val_loss: 0.2143 - val_acc: 0.9410
+    1149/1149 [==============================] - 0s 172us/step - loss: 0.2023 - acc: 0.9487 - val_loss: 0.2140 - val_acc: 0.9375
     Epoch 20/50
-    1149/1149 [==============================] - 0s 261us/step - loss: 0.1905 - acc: 0.9478 - val_loss: 0.2008 - val_acc: 0.9375
+    1149/1149 [==============================] - 0s 165us/step - loss: 0.1901 - acc: 0.9478 - val_loss: 0.2005 - val_acc: 0.9340
     Epoch 21/50
-    1149/1149 [==============================] - 0s 254us/step - loss: 0.1801 - acc: 0.9521 - val_loss: 0.2048 - val_acc: 0.9340
+    1149/1149 [==============================] - 0s 158us/step - loss: 0.1793 - acc: 0.9513 - val_loss: 0.2013 - val_acc: 0.9479
     Epoch 22/50
-    1149/1149 [==============================] - 0s 254us/step - loss: 0.1721 - acc: 0.9547 - val_loss: 0.1848 - val_acc: 0.9444
+    1149/1149 [==============================] - 0s 179us/step - loss: 0.1719 - acc: 0.9539 - val_loss: 0.1845 - val_acc: 0.9444
     Epoch 23/50
-    1149/1149 [==============================] - 0s 249us/step - loss: 0.1590 - acc: 0.9582 - val_loss: 0.1824 - val_acc: 0.9410
+    1149/1149 [==============================] - 0s 163us/step - loss: 0.1592 - acc: 0.9591 - val_loss: 0.1816 - val_acc: 0.9410
     Epoch 24/50
-    1149/1149 [==============================] - 0s 237us/step - loss: 0.1489 - acc: 0.9600 - val_loss: 0.1726 - val_acc: 0.9549
+    1149/1149 [==============================] - 0s 170us/step - loss: 0.1494 - acc: 0.9608 - val_loss: 0.1738 - val_acc: 0.9444
     Epoch 25/50
-    1149/1149 [==============================] - 0s 236us/step - loss: 0.1433 - acc: 0.9652 - val_loss: 0.1678 - val_acc: 0.9479
+    1149/1149 [==============================] - 0s 183us/step - loss: 0.1438 - acc: 0.9643 - val_loss: 0.1678 - val_acc: 0.9444
     Epoch 26/50
-    1149/1149 [==============================] - 0s 226us/step - loss: 0.1363 - acc: 0.9669 - val_loss: 0.1620 - val_acc: 0.9514
+    1149/1149 [==============================] - 0s 164us/step - loss: 0.1366 - acc: 0.9695 - val_loss: 0.1613 - val_acc: 0.9549
     Epoch 27/50
-    1149/1149 [==============================] - 0s 216us/step - loss: 0.1282 - acc: 0.9687 - val_loss: 0.1624 - val_acc: 0.9549
+    1149/1149 [==============================] - 0s 162us/step - loss: 0.1286 - acc: 0.9721 - val_loss: 0.1619 - val_acc: 0.9514
     Epoch 28/50
-    1149/1149 [==============================] - 0s 214us/step - loss: 0.1219 - acc: 0.9704 - val_loss: 0.1614 - val_acc: 0.9583
+    1149/1149 [==============================] - 0s 173us/step - loss: 0.1221 - acc: 0.9695 - val_loss: 0.1605 - val_acc: 0.9514
     Epoch 29/50
-    1149/1149 [==============================] - 0s 213us/step - loss: 0.1175 - acc: 0.9739 - val_loss: 0.1546 - val_acc: 0.9583
+    1149/1149 [==============================] - 0s 201us/step - loss: 0.1184 - acc: 0.9739 - val_loss: 0.1546 - val_acc: 0.9583
     Epoch 30/50
-    1149/1149 [==============================] - 0s 220us/step - loss: 0.1122 - acc: 0.9713 - val_loss: 0.1712 - val_acc: 0.9410
+    1149/1149 [==============================] - 0s 174us/step - loss: 0.1124 - acc: 0.9739 - val_loss: 0.1701 - val_acc: 0.9479
     Epoch 31/50
-    1149/1149 [==============================] - 0s 237us/step - loss: 0.1069 - acc: 0.9774 - val_loss: 0.1475 - val_acc: 0.9618
+    1149/1149 [==============================] - 0s 159us/step - loss: 0.1073 - acc: 0.9774 - val_loss: 0.1478 - val_acc: 0.9583
     Epoch 32/50
-    1149/1149 [==============================] - 0s 213us/step - loss: 0.1015 - acc: 0.9765 - val_loss: 0.1341 - val_acc: 0.9687
+    1149/1149 [==============================] - 0s 147us/step - loss: 0.1022 - acc: 0.9765 - val_loss: 0.1352 - val_acc: 0.9618
     Epoch 33/50
-    1149/1149 [==============================] - 0s 224us/step - loss: 0.0977 - acc: 0.9765 - val_loss: 0.1353 - val_acc: 0.9653
+    1149/1149 [==============================] - 0s 148us/step - loss: 0.0981 - acc: 0.9765 - val_loss: 0.1366 - val_acc: 0.9618
     Epoch 34/50
-    1149/1149 [==============================] - 0s 222us/step - loss: 0.0923 - acc: 0.9791 - val_loss: 0.1314 - val_acc: 0.9583
+    1149/1149 [==============================] - 0s 152us/step - loss: 0.0924 - acc: 0.9791 - val_loss: 0.1348 - val_acc: 0.9583
     Epoch 35/50
-    1149/1149 [==============================] - 0s 242us/step - loss: 0.0889 - acc: 0.9817 - val_loss: 0.1276 - val_acc: 0.9618
+    1149/1149 [==============================] - 0s 178us/step - loss: 0.0898 - acc: 0.9817 - val_loss: 0.1287 - val_acc: 0.9618
     Epoch 36/50
-    1149/1149 [==============================] - 0s 229us/step - loss: 0.0847 - acc: 0.9809 - val_loss: 0.1276 - val_acc: 0.9653
+    1149/1149 [==============================] - 0s 166us/step - loss: 0.0854 - acc: 0.9809 - val_loss: 0.1283 - val_acc: 0.9653
     Epoch 37/50
-    1149/1149 [==============================] - 0s 242us/step - loss: 0.0816 - acc: 0.9852 - val_loss: 0.1181 - val_acc: 0.9687
+    1149/1149 [==============================] - 0s 148us/step - loss: 0.0823 - acc: 0.9843 - val_loss: 0.1192 - val_acc: 0.9653
     Epoch 38/50
-    1149/1149 [==============================] - 0s 260us/step - loss: 0.0781 - acc: 0.9835 - val_loss: 0.1175 - val_acc: 0.9722
+    1149/1149 [==============================] - 0s 144us/step - loss: 0.0787 - acc: 0.9826 - val_loss: 0.1188 - val_acc: 0.9687
     Epoch 39/50
-    1149/1149 [==============================] - 0s 235us/step - loss: 0.0780 - acc: 0.9852 - val_loss: 0.1206 - val_acc: 0.9583
+    1149/1149 [==============================] - 0s 138us/step - loss: 0.0786 - acc: 0.9843 - val_loss: 0.1218 - val_acc: 0.9583
     Epoch 40/50
-    1149/1149 [==============================] - 0s 235us/step - loss: 0.0721 - acc: 0.9887 - val_loss: 0.1093 - val_acc: 0.9722
+    1149/1149 [==============================] - 0s 176us/step - loss: 0.0727 - acc: 0.9896 - val_loss: 0.1110 - val_acc: 0.9653
     Epoch 41/50
-    1149/1149 [==============================] - 0s 234us/step - loss: 0.0701 - acc: 0.9861 - val_loss: 0.1160 - val_acc: 0.9687
+    1149/1149 [==============================] - 0s 181us/step - loss: 0.0703 - acc: 0.9852 - val_loss: 0.1172 - val_acc: 0.9653
     Epoch 42/50
-    1149/1149 [==============================] - 0s 234us/step - loss: 0.0669 - acc: 0.9887 - val_loss: 0.1103 - val_acc: 0.9653
+    1149/1149 [==============================] - 0s 162us/step - loss: 0.0672 - acc: 0.9887 - val_loss: 0.1111 - val_acc: 0.9618
     Epoch 43/50
-    1149/1149 [==============================] - 0s 211us/step - loss: 0.0642 - acc: 0.9869 - val_loss: 0.1047 - val_acc: 0.9653
+    1149/1149 [==============================] - 0s 165us/step - loss: 0.0643 - acc: 0.9878 - val_loss: 0.1077 - val_acc: 0.9653
     Epoch 44/50
-    1149/1149 [==============================] - 0s 219us/step - loss: 0.0621 - acc: 0.9878 - val_loss: 0.1001 - val_acc: 0.9687
+    1149/1149 [==============================] - 0s 149us/step - loss: 0.0620 - acc: 0.9878 - val_loss: 0.1019 - val_acc: 0.9653
     Epoch 45/50
-    1149/1149 [==============================] - 0s 220us/step - loss: 0.0584 - acc: 0.9922 - val_loss: 0.0977 - val_acc: 0.9653
+    1149/1149 [==============================] - 0s 148us/step - loss: 0.0586 - acc: 0.9922 - val_loss: 0.1003 - val_acc: 0.9618
     Epoch 46/50
-    1149/1149 [==============================] - 0s 231us/step - loss: 0.0569 - acc: 0.9913 - val_loss: 0.0983 - val_acc: 0.9722
+    1149/1149 [==============================] - 0s 187us/step - loss: 0.0571 - acc: 0.9922 - val_loss: 0.0999 - val_acc: 0.9722
     Epoch 47/50
-    1149/1149 [==============================] - 0s 226us/step - loss: 0.0556 - acc: 0.9913 - val_loss: 0.0976 - val_acc: 0.9687
+    1149/1149 [==============================] - 0s 175us/step - loss: 0.0557 - acc: 0.9913 - val_loss: 0.0987 - val_acc: 0.9687
     Epoch 48/50
-    1149/1149 [==============================] - 0s 229us/step - loss: 0.0530 - acc: 0.9904 - val_loss: 0.0992 - val_acc: 0.9653
+    1149/1149 [==============================] - 0s 166us/step - loss: 0.0530 - acc: 0.9896 - val_loss: 0.1005 - val_acc: 0.9618
     Epoch 49/50
-    1149/1149 [==============================] - 0s 216us/step - loss: 0.0520 - acc: 0.9913 - val_loss: 0.0999 - val_acc: 0.9653
+    1149/1149 [==============================] - 0s 159us/step - loss: 0.0523 - acc: 0.9922 - val_loss: 0.1016 - val_acc: 0.9618
     Epoch 50/50
-    1149/1149 [==============================] - 0s 235us/step - loss: 0.0486 - acc: 0.9922 - val_loss: 0.0996 - val_acc: 0.9687
+    1149/1149 [==============================] - 0s 171us/step - loss: 0.0486 - acc: 0.9922 - val_loss: 0.1000 - val_acc: 0.9687
 
 
 
@@ -1717,12 +1743,12 @@ ax1.legend()
 
 
 
-    <matplotlib.legend.Legend at 0x1a4de5fcc0>
+    <matplotlib.legend.Legend at 0x1a427e2e80>
 
 
 
 
-![png](index_files/index_99_1.png)
+![png](index_files/index_118_1.png)
 
 
 
@@ -1753,177 +1779,9 @@ confusion_matrix(y_test, y_hat_test)
 
 
 
-Keras comes with all sorts of handy tools, including ways to streamline train test split from folders on your desktop. You will definitely find this useful. Learn will lead the way.
+Wow, look at that performance!  
 
-You don't have this dog vs. cat dataset on your computer, but that is ok. 
+That is great, but remember, we were dealing with simple black and white images.  With color, our basic neural net will have less success.
 
-The code below shows how we process that data with Keras. It also shows that a basic neural net does not perform well on the dataset.  Tomorrow, we will explore better tools for image processing.
+We will explore more advanced tools in the coming days.
 
-
-```python
-from keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
-
-
-train_data_dir = 'dogvcat/dataset/training_set'
-test_data_dir = 'dogvcat/dataset/test_set'
-
-# Get all the data in the directory data/validation (132 images), and reshape them
-test_generator = ImageDataGenerator(rescale=1./255).flow_from_directory(
-        test_data_dir, 
-        target_size=(64, 64), batch_size=1000)
-
-# Get all the data in the directory data/train (790 images), and reshape them
-train_generator = ImageDataGenerator(rescale=1./255).flow_from_directory(
-        train_data_dir, 
-        target_size=(64, 64), batch_size=5000)
-
-# Create the datasets
-train_images, train_labels = next(train_generator)
-test_images, test_labels = next(test_generator)
-```
-
-    Found 2001 images belonging to 2 classes.
-    Found 8000 images belonging to 2 classes.
-
-
-
-```python
-len(train_images)
-```
-
-
-
-
-    5000
-
-
-
-
-```python
-train_images[0].shape
-```
-
-
-
-
-    (64, 64, 3)
-
-
-
-
-```python
-train_images[0].flatten()
-```
-
-
-
-
-    array([0.12156864, 0.01568628, 0.03529412, ..., 0.40000004, 0.36078432,
-           0.3529412 ], dtype=float32)
-
-
-
-
-```python
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
-array_to_img(train_images[0])
-
-
-```
-
-
-
-
-![png](index_files/index_107_0.png)
-
-
-
-
-```python
-array_to_img(train_images[-1])
-```
-
-
-
-
-![png](index_files/index_108_0.png)
-
-
-
-
-```python
-tr_images = train_images.reshape(train_images.shape[0], -1)
-te_images = test_images.reshape(test_images.shape[0], -1)
-tr_images.shape
-```
-
-
-
-
-    (5000, 12288)
-
-
-
-
-```python
-model = Sequential()
-model.add(Dense(12, activation='relu', input_dim=12288,))
-model.add(Dense(8 ,  activation='relu' ))
-model.add(Dense(3 ,  activation='relu' ))
-model.add(Dense(2 , activation = 'sigmoid' ))
-
-model.compile(optimizer='adam' ,
-              loss='binary_crossentropy'  ,
-              metrics=['accuracy'])
-results = model.fit(tr_images, train_labels, epochs=20, batch_size= 10,
-                    validation_data=(te_images, test_labels))
-```
-
-    Train on 5000 samples, validate on 1000 samples
-    Epoch 1/20
-    5000/5000 [==============================] - 4s 751us/step - loss: 0.6954 - acc: 0.4938 - val_loss: 0.6932 - val_acc: 0.4890
-    Epoch 2/20
-    5000/5000 [==============================] - 2s 356us/step - loss: 0.6932 - acc: 0.4998 - val_loss: 0.6933 - val_acc: 0.4890
-    Epoch 3/20
-    5000/5000 [==============================] - 2s 348us/step - loss: 0.6932 - acc: 0.4974 - val_loss: 0.6932 - val_acc: 0.4890
-    Epoch 4/20
-    5000/5000 [==============================] - 2s 347us/step - loss: 0.6932 - acc: 0.4944 - val_loss: 0.6932 - val_acc: 0.4890
-    Epoch 5/20
-    5000/5000 [==============================] - 2s 341us/step - loss: 0.6932 - acc: 0.4954 - val_loss: 0.6933 - val_acc: 0.4890
-    Epoch 6/20
-    5000/5000 [==============================] - 2s 348us/step - loss: 0.6932 - acc: 0.5010 - val_loss: 0.6932 - val_acc: 0.4890
-    Epoch 7/20
-    5000/5000 [==============================] - 2s 354us/step - loss: 0.6932 - acc: 0.4950 - val_loss: 0.6931 - val_acc: 0.5110
-    Epoch 8/20
-    5000/5000 [==============================] - 2s 350us/step - loss: 0.6932 - acc: 0.4914 - val_loss: 0.6932 - val_acc: 0.4890
-    Epoch 9/20
-    5000/5000 [==============================] - 2s 331us/step - loss: 0.6932 - acc: 0.4958 - val_loss: 0.6932 - val_acc: 0.4890
-    Epoch 10/20
-    5000/5000 [==============================] - 2s 347us/step - loss: 0.6932 - acc: 0.4954 - val_loss: 0.6932 - val_acc: 0.4890
-    Epoch 11/20
-    5000/5000 [==============================] - 2s 357us/step - loss: 0.6932 - acc: 0.4966 - val_loss: 0.6933 - val_acc: 0.4890
-    Epoch 12/20
-    5000/5000 [==============================] - 2s 353us/step - loss: 0.6932 - acc: 0.4934 - val_loss: 0.6933 - val_acc: 0.4890
-    Epoch 13/20
-    5000/5000 [==============================] - 2s 356us/step - loss: 0.6932 - acc: 0.4970 - val_loss: 0.6932 - val_acc: 0.4890
-    Epoch 14/20
-    5000/5000 [==============================] - 2s 359us/step - loss: 0.6932 - acc: 0.4954 - val_loss: 0.6933 - val_acc: 0.4890
-    Epoch 15/20
-    5000/5000 [==============================] - 2s 357us/step - loss: 0.6932 - acc: 0.4902 - val_loss: 0.6932 - val_acc: 0.4890
-    Epoch 16/20
-    5000/5000 [==============================] - 2s 348us/step - loss: 0.6932 - acc: 0.4954 - val_loss: 0.6931 - val_acc: 0.5110
-    Epoch 17/20
-    5000/5000 [==============================] - 2s 349us/step - loss: 0.6932 - acc: 0.5014 - val_loss: 0.6932 - val_acc: 0.4890
-    Epoch 18/20
-    5000/5000 [==============================] - 2s 345us/step - loss: 0.6932 - acc: 0.4954 - val_loss: 0.6932 - val_acc: 0.4890
-    Epoch 19/20
-    5000/5000 [==============================] - 2s 352us/step - loss: 0.6932 - acc: 0.4970 - val_loss: 0.6931 - val_acc: 0.5110
-    Epoch 20/20
-    5000/5000 [==============================] - 2s 358us/step - loss: 0.6933 - acc: 0.4862 - val_loss: 0.6932 - val_acc: 0.4890
-
-
-
-```python
-
-```
