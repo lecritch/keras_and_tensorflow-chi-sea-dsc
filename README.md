@@ -63,8 +63,8 @@ When we flatten an image by stacking the rows in a column, we are decreasing the
 
 When we unrow a column, we increase its rank.
 
-### Wait, what tool am I even using, what's Keras?
-## More levers and buttons
+
+## TensorFLow has more levers and buttons, but Keras is more user friendly
 
 Coding directly in **Tensorflow** allows you to tweak more parameters to optimize performance. The **Keras** wrapper makes the code more accessible for developers prototyping models.
 
@@ -154,22 +154,6 @@ model.compile(optimizer='rmsprop' ,
               metrics=['accuracy'])
 model.fit(X, y_binary, epochs=50, batch_size= 10 )
 ```
-
-
-    ---------------------------------------------------------------------------
-
-    NameError                                 Traceback (most recent call last)
-
-    <ipython-input-14-a125b243e4fe> in <module>
-          1 #__SOLUTION__
-          2 
-    ----> 3 model = Sequential()
-          4 model.add(Dense(12, activation='relu', input_dim=64,))
-          5 model.add(Dense(8 ,  activation='relu' ))
-
-
-    NameError: name 'Sequential' is not defined
-
 
 ### Things to know:
 - the data and labels in `fit()` need to be numpy arrays, not pandas dfs. Else it won't work.
@@ -287,6 +271,14 @@ That stopped too early.  We can specify the number of epochs that it doesn't see
 Now let's return to the original problem: predicting 0 through 9
 
 What is different in the code below from the code above?
+
+$$\large \text{Softmax}(x_{i}) = \frac{\exp(x_i)}{\sum_j \exp(x_j)}$$
+
+The sofmax function outputs a number between 0 and 1 for each of our classes.  All of the probabilities of the classes sum up to 1.
+
+The number of nodes in our output layer equals the number of categories in our dataset.
+
+We also need a new loss function categorical crossentropy, which calculates separate loss for each label and sums the results.
 
 Wow, look at that performance!  
 
